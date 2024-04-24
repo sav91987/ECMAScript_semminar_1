@@ -44,13 +44,20 @@ function findElementByClass(rootElement, str) {
     return rootElement;
   } else {
     const childs = rootElement.children;
-    if (childs) {
+
+    if (childs.length !== 0) {
       for (let i = 0; i < childs.length; i++) {
+        //console.log(childs[i]);
         return findElementByClass(childs[i], str);
       }
     } else {
-      return null;
+      const neib = rootElement.nextElementSibling;
+      if (neib) {
+        console.log(neib);
+        return findElementByClass(neib, str);
+      }
     }
+    return "Указанного элемента не найдено";
   }
 }
 
@@ -58,3 +65,4 @@ const rootElement = document.getElementById("root");
 
 const targetElement = findElementByClass(rootElement, "my-class");
 console.log(targetElement);
+
